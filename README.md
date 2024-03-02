@@ -1,1 +1,113 @@
-# vim
+### VIM (GVIM)
+
+**My vimrc file:
+
+```bash
+source $VIMRUNTIME/vimrc_example.vim
+
+au GUIEnter * simalt ~x
+set hls
+set is
+set cb=unnamed
+set gfn=Fixedsys:h16
+set ts=4
+set sw=4
+set si
+
+"cd C:\Users\sami\Music\Code
+cd $HOME\Music\Code
+
+autocmd GUIEnter * set vb t_vb=
+set belloff=all
+
+set autoread                                                                                                                                                                                    
+au CursorHold * checktime
+
+autocmd BufLeave,FocusLost * silent! wall
+
+"-------This is for {} in raw vimrc file-------------------
+inoremap { {}<Left>
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {{ {
+inoremap {} {}
+
+"Custom Keymap-------------------------
+nnoremap <A-j> <Esc>
+inoremap <A-j> <Esc>
+nnoremap <C-A> ggVG
+nnoremap <C-b> :Texplore<CR>
+
+"Session Create------------------
+"autocmd VimLeave * mksession! ~/session.vim "--auto create on exit
+nnoremap <A-5> :mksession! ~/session.vim<CR>
+nnoremap <A-0> :source ~/session.vim<CR>
+
+"------C++---------
+autocmd filetype cpp nnoremap <A-l> :w <bar> !g++ -std=c++17 -DONPC % -o %:r -Wl,--stack,268435456<CR>
+autocmd filetype cpp nnoremap <A-k> :!%:r<CR>
+
+"-------Python--------------
+autocmd filetype python nnoremap <A-k> :w <bar> !python %<CR>
+
+"------Comment---------------
+autocmd filetype cpp nnoremap <C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
+
+"Plugins:----------start------------------------
+
+call plug#begin('~\vimfiles\plugged')
+ 
+Plug 'sirver/ultisnips'
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsEditSplit="vertical"
+ 
+Plug 'honza/vim-snippets'
+
+call plug#end()
+":PlugInstall----------------------end--------
+
+set nu
+augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set rnu
+    autocmd BufLeave,FocusLost,InsertEnter * set nornu
+augroup END
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in	
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg1 = substitute(arg1, '!', '\!', 'g')
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg2 = substitute(arg2, '!', '\!', 'g')
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let arg3 = substitute(arg3, '!', '\!', 'g')
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  let cmd = substitute(cmd, '!', '\!', 'g')
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
+
+```
