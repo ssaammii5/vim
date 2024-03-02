@@ -119,3 +119,5 @@ endfunction
 ```bash
 :PlugInstall
 ```
+
+- Session File Structure in `Code.zip`
