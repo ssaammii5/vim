@@ -111,3 +111,11 @@ function MyDiff()
 endfunction
 
 ```
+
+### Instruction:
+
+- To install Plugin:
+
+```bash
+:PlugInstall
+```
