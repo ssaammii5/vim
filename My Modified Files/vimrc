@@ -32,6 +32,8 @@ nnoremap <A-j> <Esc>
 inoremap <A-j> <Esc>
 nnoremap <C-A> ggVG
 nnoremap <C-b> :Texplore<CR>
+:inoremap <A-i> <C-W>
+:inoremap <C-i> <BS>
 
 "Session Create------------------
 "autocmd VimLeave * mksession! ~/session.vim "--auto create on exit
