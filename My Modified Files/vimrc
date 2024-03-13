@@ -12,12 +12,19 @@ set si
 "cd C:\Users\sami\Music\Code
 cd $HOME\Music\Code
 
+"tabnew a.cpp | tabe b.cpp | tabe c.cpp | tabe d.cpp | tabe e.cpp
+":vsplit a.cpp
+":split a.cpp
+":tabn 1
+
 autocmd GUIEnter * set vb t_vb=
 set belloff=all
+:set guioptions -=T
+
+"set linespace=6
 
 set autoread                                                                                                                                                                                    
 au CursorHold * checktime
-
 autocmd BufLeave,FocusLost * silent! wall
 
 
@@ -33,7 +40,10 @@ inoremap <A-j> <Esc>
 nnoremap <C-A> ggVG
 nnoremap <C-b> :Texplore<CR>
 :inoremap <A-i> <C-W>
-:inoremap <C-i> <BS>
+:inoremap <A-o> <BS>
+nnoremap d "_dd
+nnoremap U <C-r>
+
 
 "Session Create------------------
 "autocmd VimLeave * mksession! ~/session.vim "--auto create on exit
