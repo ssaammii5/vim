@@ -32,6 +32,7 @@ set belloff=all
 "set linespace=6
 
 set autoread
+set expandtab
 
 "---------------- These two line for save on focuslost --------------------
 "au CursorHold * checktime
