@@ -1,13 +1,21 @@
 source $VIMRUNTIME/vimrc_example.vim
 
+set encoding=utf8
+set fileencoding=utf8
+
+:set winaltkeys=no
 au GUIEnter * simalt ~x
 set hls
 set is
 set cb=unnamed
-set gfn=Fixedsys:h16
+"set gfn=Fixedsys:h16
+set guifont=JetBrains\ Mono\ SemiBold:h15
 set ts=4
 set sw=4
 set si
+
+:set linebreak
+:set nolist
 
 "cd C:\Users\sami\Music\Code
 cd $HOME\Music\Code
@@ -23,9 +31,11 @@ set belloff=all
 
 "set linespace=6
 
-set autoread                                                                                                                                                                                    
-au CursorHold * checktime
-autocmd BufLeave,FocusLost * silent! wall
+set autoread
+
+"---------------- These two line for save on focuslost --------------------
+"au CursorHold * checktime
+"autocmd BufLeave,FocusLost * silent! wall
 
 
 "-------This is for {} in raw vimrc file-------------------
@@ -37,12 +47,20 @@ inoremap {} {}
 "Custom Keymap-------------------------
 nnoremap <A-j> <Esc>
 inoremap <A-j> <Esc>
+nnoremap <A-J> <Esc>
+inoremap <A-J> <Esc>
 nnoremap <C-A> ggVG
 nnoremap <C-b> :Texplore<CR>
-:inoremap <A-i> <C-W>
-:inoremap <A-o> <BS>
+:inoremap <A-o> <C-W>
+:inoremap <A-i> <BS>
+:inoremap <A-O> <C-W>
+:inoremap <A-I> <BS>
 nnoremap d "_dd
 nnoremap U <C-r>
+inoremap <A-;> =
+inoremap <A-'> +
+inoremap <A-,> -
+inoremap <A-.> _
 
 
 "Session Create------------------
@@ -51,11 +69,11 @@ nnoremap <A-5> :mksession! ~/session.vim<CR>
 nnoremap <A-0> :source ~/session.vim<CR>
 
 "------C++---------
-autocmd filetype cpp nnoremap <A-l> :w <bar> !g++ -std=c++17 -DONPC % -o %:r -Wl,--stack,268435456<CR>
-autocmd filetype cpp nnoremap <A-k> :!%:r<CR>
+autocmd filetype cpp nnoremap <A-d> :w <bar> !g++ -std=c++17 -DONPC % -o %:r -Wl,--stack,268435456<CR>
+autocmd filetype cpp nnoremap <A-f> :!%:r<CR>
 
 "-------Python--------------
-autocmd filetype python nnoremap <A-k> :w <bar> !python %<CR>
+autocmd filetype python nnoremap <A-f> :w <bar> !python %<CR>
 
 "------Comment---------------
 autocmd filetype cpp nnoremap <C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
